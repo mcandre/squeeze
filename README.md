@@ -19,12 +19,16 @@ squeeze streamlines ecomics.
 % cd examples
 
 % ls
-candy-1.png  candy-2.png  candy-3.png
+candy-1.png
+candy-2.png
+candy-3.png
 
 % squeeze
 
 % ls
-candy-0001.webp  candy-0002.webp  candy-0003.webp
+candy-0001.webp
+candy-0002.webp
+candy-0003.webp
 ```
 
 For more options, run `squeeze -h`.
