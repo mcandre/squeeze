@@ -2,7 +2,7 @@
 
 [![Lint](https://github.com/mcandre/squeeze/actions/workflows/lint.yml/badge.svg)](https://github.com/mcandre/squeeze/actions/workflows/lint.yml) [![license](https://img.shields.io/badge/license-BSD-0)](LICENSE.md)
 
-```txt
+```text
  ___ ___ _ _ ___ ___ ___ ___
 |_ -| . | | | -_| -_|- _| -_|
 |___|_  |___|___|___|___|___|
