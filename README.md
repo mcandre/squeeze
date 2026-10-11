@@ -78,6 +78,10 @@ squeeze may operate on child directories and files.
 
 When in doubt, change directory to a more narrow set of comics.
 
+# WARNING: UNSTABLE INTERFACE
+
+The design of our interfaces is rough. Expect breaking changes meanwhile.
+
 # RESOURCES
 
 Prior art, personal plugs, and tools for managing digital content.
