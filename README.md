@@ -16,7 +16,7 @@ squeeze streamlines ecomics.
 # EXAMPLE
 
 ```console
-% cd examples
+% cd examples/candy
 
 % ls
 candy-1.png
@@ -25,10 +25,13 @@ candy-3.png
 
 % squeeze
 
-% ls
-candy-0001.webp
-candy-0002.webp
-candy-0003.webp
+% cd ..
+
+% unzip -tvl candy.cbz
+Archive:  candy.cbz
+    testing: candy-0001.webp          OK
+    testing: candy-0002.webp          OK
+    testing: candy-0003.webp          OK
 ```
 
 For more options, run `squeeze -h`.
@@ -48,6 +51,7 @@ git clone https://github.com/mcandre/squeeze.git ~/src/github.com/mcandre/squeez
 
 ## Recommended
 
+* [tree](https://en.wikipedia.org/wiki/Tree_(command))
 * [zip](https://infozip.sourceforge.net/)
 
 ## Postinstall
@@ -64,7 +68,21 @@ squeeze normalizes ecomic image directories:
 * Remove caches for common file managers (Explorer, Finder)
 * Zero pad panel filenames for more consistent page order
 
-# WARNING: REAPPEARING FILE MANAGER CACHES
+# WARNINGS
+
+## Unstable Interface
+
+The design of our interfaces is rough. Expect breaking changes meanwhile.
+
+## Corrupt Images
+
+squeeze may delete any images with low level file corruption defects.
+
+## Comic Book Overwriting
+
+squeeze may overwrite source comic archives.
+
+## Reapparing File Manager Cache
 
 When browsing files with graphical file managers, cache files may reappear.
 
@@ -72,19 +90,11 @@ Temporarily navigate to a different directory during comic archival.
 
 The `zip` utility may exclude these with `-x '**/.DS_Store' -x '**/Thumbs.db'`.
 
-# WARNING: CORRUPT PANELS
-
-squeeze removes corrupt images.
-
-# WARNING: RECURSION
+## Recursion
 
 squeeze may operate on child directories and files.
 
 When in doubt, change directory to a more narrow set of comics.
-
-# WARNING: UNSTABLE INTERFACE
-
-The design of our interfaces is rough. Expect breaking changes meanwhile.
 
 # RESOURCES
 

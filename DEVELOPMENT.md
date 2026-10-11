@@ -12,6 +12,7 @@ We follow standard, `make` based commands for performing build operations.
 * [ImageMagick](https://imagemagick.org/#gsc.tab=0)
 * [make](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html)
 * [ShellCheck](https://www.shellcheck.net/) 0.11.0+
+* [tree](https://en.wikipedia.org/wiki/Tree_(command))
 * [zip](https://infozip.sourceforge.net/)
 * Provision additional dev tools with `make -f install.mk`
 

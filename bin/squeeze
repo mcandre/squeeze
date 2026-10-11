@@ -75,6 +75,14 @@ for EXTENSION in "${SOURCE_EXTENSIONS[@]}"; do
         -delete
 done
 
+d="$(basename "$(pwd)")"
+
+find \
+    . \
+    -type f |
+    sort |
+    zip ../"${d}.cbz" -@
+
 find \
     . \
     -type f \
