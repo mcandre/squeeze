@@ -55,6 +55,8 @@ git clone https://github.com/mcandre/squeeze.git ~/src/github.com/mcandre/squeez
 
 Register `"$HOME/src/github.com/mcandre/squeeze/bin` to `PATH` environment variable.
 
+For details on tuning squeeze, see [CONFIGURATION](CONFIGURATION.md).
+
 For details on building from source, see [DEVELOPMENT](DEVELOPMENT.md).
 
 # ABOUT
