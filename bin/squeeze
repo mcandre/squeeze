@@ -2,7 +2,7 @@
 unset IFS
 set -eufo pipefail
 
-SQUEEZE_VERSION='0.0.1'
+SQUEEZE_VERSION='0.0.2'
 EXCLUDE_GLOBS=(
     '.DS_Store'
     'Thumbs.db'
