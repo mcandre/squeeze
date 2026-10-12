@@ -3,17 +3,28 @@ unset IFS
 set -eufo pipefail
 
 SQUEEZE_VERSION='0.0.1'
+EXCLUDE_GLOBS=(
+    '.DS_Store'
+    'Thumbs.db'
+)
 
 usage() {
-    printf "Usage: %s [OPTIONS] <path>\n" "$0"
+    printf "Usage: %s [OPTIONS] <path> [<path> [<path> ...]]\n" "$0"
     printf "\n"
-    printf -- "-v\tShow version info\n"
-    printf -- "-h\tShow usage menu\n"
+    printf -- "-a\t\tEnable author normalization\n"
+    printf -- "-x <glob>\tAppend file path exclusion. Default: (${EXCLUDE_GLOBS[*]})\n"
+    printf -- "-d\t\tEnable additional logging\n"
+    printf -- "-v\t\tShow version info\n"
+    printf -- "-h\t\tShow usage menu\n"
 }
 
 banner() {
     printf "%s\n" "$SQUEEZE_VERSION"
 }
+
+SQUEEZE_SUFFIX='.fresh.cbz'
+DEBUG='0'
+AUTHOR_NORMALIZATION='0'
 
 SOURCE_EXTENSIONS=(
     'bmp'
@@ -25,11 +36,22 @@ TARGET_EXTENSION='webp'
 ALL_EXTENSIONS=("${SOURCE_EXTENSIONS[@]}")
 ALL_EXTENSIONS+=("$TARGET_EXTENSION")
 
-PADDING='4'
-MAX_CHILD_FILES='9999'
-
 while [ "$#" -ge 1 ]; do
     case "$1" in
+    '-d')
+        shift
+        DEBUG='1'
+        ;;
+    '-a')
+        shift
+        AUTHOR_NORMALIZATION='1'
+        ;;
+    '-x')
+        shift
+        GLOB="$1"
+        shift
+        EXCLUDE_GLOBS+=("$GLOB")
+        ;;
     '-v')
         shift
         banner
@@ -46,45 +68,96 @@ while [ "$#" -ge 1 ]; do
     esac
 done
 
-total_child_files="$(find . -type f | wc -l)"
+freshen() {
+    source_archive="$1"
+    shopt -s nocasematch
 
-if [ "$total_child_files" -gt "$MAX_CHILD_FILES" ]; then
-    echo "error: working directory contains > $MAX_CHILD_FILES files"
+    if ! [[ "$source_archive" =~ ^.*\.(cbz|zip)$ ]]; then
+        echo "error: unsupported archive file type: $source_archive"
+        return 1
+    fi
+
+    echo "info: freshening: $source_archive"
+
+    t="$(mktemp -d)"
+
+    if [[ "$DEBUG" -eq '1' ]]; then
+        echo "debug: temp dir: $t"
+    fi
+
+    source_archive_normalized="$source_archive"
+    archive_author_normalized_basename="$(basename "$source_archive")"
+
+    if [[ "$AUTHOR_NORMALIZATION" -eq '1' && "$source_archive" =~ ^\[([^\]]+)\]\ (.*)$ ]]; then
+        author="${BASH_REMATCH[1]}"
+        rest="${BASH_REMATCH[2]}"
+        author_train_case="${author// /-}"
+        author_lower_train_case="$(echo "$author_train_case" | tr '[:upper:]' '[:lower:]')"
+        archive_author_normalized_basename="${author_lower_train_case} - ${rest}"
+
+        if [[ "$DEBUG" -eq '1' ]]; then
+            echo "debug: archive author normalized: $archive_author_normalized_basename"
+        fi
+
+        source_archive_normalized="${t}/${archive_author_normalized_basename}"
+        cp "$source_archive" "$source_archive_normalized"
+    fi
+
+    source_dir="${t}/${source_archive_normalized_basename%.*}"
+
+    unzip \
+        -d "$source_dir" \
+        "$source_archive_normalized" >/dev/null
+
+    if [[ "$DEBUG" -eq '1' ]]; then
+        echo "debug: extracted source dir: $source_dir"
+    fi
+
+    total_child_files="$(find "$source_dir" -type f | wc -l)"
+    padding="$(echo "scale=10; val = l($total_child_files)/l(10); scale=0; if (val > 0 && val != val/1) val/1 + 1 else val/1" | bc -l)"
+
+    for EXTENSION in "${ALL_EXTENSIONS[@]}"; do
+        find \
+            "$source_dir" \
+            -type f \
+            -iname "*.${EXTENSION}" \
+            -exec rename "s/(\\d+)(?=\\.\\w+$)/sprintf(\"%0${padding}d\", \$1)/e" "{}" \+
+    done
+
+    for EXTENSION in "${SOURCE_EXTENSIONS[@]}"; do
+        find "$source_dir" -type f -iname "*.${EXTENSION}" -print0 | while IFS= read -r -d $'\0' f; do
+            b="${f%."${EXTENSION}"}"
+            c="${b}.${TARGET_EXTENSION}"
+            magick "$f" "$c"
+        done
+
+        find \
+            "$source_dir" \
+            -type f \
+            -iname "*.${EXTENSION}" \
+            -delete
+    done
+
+    target_archive="$(dirname -- "$(realpath "$source_archive")")/${archive_author_normalized_basename%.*}${SQUEEZE_SUFFIX}"
+    pushd "$source_dir" >/dev/null
+    find \
+        . \
+        -type f |
+        sort |
+        zip \
+            -x ${EXCLUDE_GLOBS[*]} \
+            -@ \
+            "$target_archive" >/dev/null
+
+    popd >/dev/null
+    rm -rf "$t"
+}
+
+if [ "$#" -eq 0 ]; then
+    usage
     exit 1
 fi
 
-for EXTENSION in "${ALL_EXTENSIONS[@]}"; do
-    find \
-        . \
-        -type f \
-        -iname "*.${EXTENSION}" \
-        -exec rename "s/(\\d+)(?=\\.\\w+$)/sprintf(\"%0${PADDING}d\", \$1)/e" "{}" \+
+for pth in "$@"; do
+    freshen "$pth"
 done
-
-for EXTENSION in "${SOURCE_EXTENSIONS[@]}"; do
-    find . -type f -iname "*.${EXTENSION}" -print0 | while IFS= read -r -d $'\0' f; do
-        b="$(basename "$f" ".${EXTENSION}")"
-        c="${b}.${TARGET_EXTENSION}"
-        magick "$f" "$c"
-    done
-
-    find \
-        . \
-        -type f \
-        -iname "*.${EXTENSION}" \
-        -delete
-done
-
-d="$(basename "$(pwd)")"
-
-find \
-    . \
-    -type f |
-    sort |
-    zip ../"${d}.cbz" -@
-
-find \
-    . \
-    -type f \
-    \( -name .DS_Store -o -name Thumbs.db \) \
-    -delete

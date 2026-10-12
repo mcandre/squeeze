@@ -5,8 +5,8 @@ We follow standard, `make` based commands for performing build operations.
 # PREREQUISITES
 
 * a UNIX-like environment (e.g. [WSL](https://learn.microsoft.com/en-us/windows/wsl/))
-* [awk](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/awk.html)
 * [bash](https://www.gnu.org/software/bash/) 4+
+* [bc](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/bc.html)
 * [findutils](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/find.html)
 * [Go](https://go.dev/)
 * [ImageMagick](https://imagemagick.org/#gsc.tab=0)

@@ -16,22 +16,18 @@ squeeze streamlines ecomics.
 # EXAMPLE
 
 ```console
-% cd examples/candy
+% cd examples
 
-% ls
-candy-1.png
-candy-2.png
-candy-3.png
+% ls -Ahl
+total 7.9M
+-rw-r--r-- 1 andrew staff 7.9M Oct 12 09:49 candy.zip
 
-% squeeze
+% squeeze candy.zip
 
-% cd ..
-
-% unzip -tvl candy.cbz
-Archive:  candy.cbz
-    testing: candy-0001.webp          OK
-    testing: candy-0002.webp          OK
-    testing: candy-0003.webp          OK
+% ls -Ahl
+total 8.9M
+-rw-r--r-- 1 andrew staff 1018K Oct 12 09:52 candy.fresh.cbz
+-rw-r--r-- 1 andrew staff  7.9M Oct 12 09:49 candy.zip
 ```
 
 For more options, run `squeeze -h`.
@@ -45,14 +41,15 @@ git clone https://github.com/mcandre/squeeze.git ~/src/github.com/mcandre/squeez
 ## Prerequisites
 
 * [bash](https://www.gnu.org/software/bash/) 4+
+* [bc](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/bc.html)
 * [findutils](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/find.html)
 * [git](https://git-scm.com/)
 * [ImageMagick](https://imagemagick.org/#gsc.tab=0)
+* [zip](https://infozip.sourceforge.net/)
 
 ## Recommended
 
 * [tree](https://en.wikipedia.org/wiki/Tree_(command))
-* [zip](https://infozip.sourceforge.net/)
 
 ## Postinstall
 
@@ -62,7 +59,7 @@ For details on building from source, see [DEVELOPMENT](DEVELOPMENT.md).
 
 # ABOUT
 
-squeeze normalizes ecomic image directories:
+squeeze normalizes ecomics:
 
 * Convert images to modern [WEBP](https://developers.google.com/speed/webp) format
 * Remove caches for common file managers (Explorer, Finder)
@@ -70,31 +67,13 @@ squeeze normalizes ecomic image directories:
 
 # WARNINGS
 
+## Corrupt Image Elision
+
+squeeze drops any images reported corrupted by ImageMagick.
+
 ## Unstable Interface
 
 The design of our interfaces is rough. Expect breaking changes meanwhile.
-
-## Corrupt Images
-
-squeeze may delete any images with low level file corruption defects.
-
-## Comic Book Overwriting
-
-squeeze may overwrite source comic archives.
-
-## Reapparing File Manager Cache
-
-When browsing files with graphical file managers, cache files may reappear.
-
-Temporarily navigate to a different directory during comic archival.
-
-The `zip` utility may exclude these with `-x '**/.DS_Store' -x '**/Thumbs.db'`.
-
-## Recursion
-
-squeeze may operate on child directories and files.
-
-When in doubt, change directory to a more narrow set of comics.
 
 # RESOURCES
 
