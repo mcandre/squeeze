@@ -73,6 +73,10 @@ squeeze normalizes ecomics:
 
 squeeze drops any images reported corrupted by ImageMagick.
 
+## Storage Efficiency
+
+squeeze attempts to reduce comic archive filesize. This is best effort, not a guarantee.
+
 ## Unstable Interface
 
 The design of our interfaces is rough. Expect breaking changes meanwhile.
