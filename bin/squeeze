@@ -12,7 +12,7 @@ usage() {
     printf "Usage: %s [OPTIONS] <path> [<path> [<path> ...]]\n" "$0"
     printf "\n"
     printf -- "-a\t\tEnable author normalization\n"
-    printf -- "-x <glob>\tAppend file path exclusion. Default: (${EXCLUDE_GLOBS[*]})\n"
+    printf -- "-x <glob>\tAppend file path exclusion. Default: (%s)\n" "${EXCLUDE_GLOBS[*]}"
     printf -- "-d\t\tEnable additional logging\n"
     printf -- "-v\t\tShow version info\n"
     printf -- "-h\t\tShow usage menu\n"
@@ -86,28 +86,28 @@ freshen() {
     fi
 
     source_archive_normalized="$source_archive"
-    archive_author_normalized_basename="$(basename "$source_archive")"
+    source_archive_normalized_basename="$(basename "$source_archive")"
 
     if [[ "$AUTHOR_NORMALIZATION" -eq '1' && "$source_archive" =~ ^\[([^\]]+)\]\ (.*)$ ]]; then
         author="${BASH_REMATCH[1]}"
         rest="${BASH_REMATCH[2]}"
         author_train_case="${author// /-}"
         author_lower_train_case="$(echo "$author_train_case" | tr '[:upper:]' '[:lower:]')"
-        archive_author_normalized_basename="${author_lower_train_case} - ${rest}"
+        source_archive_normalized_basename="${author_lower_train_case} - ${rest}"
 
         if [[ "$DEBUG" -eq '1' ]]; then
-            echo "debug: archive author normalized: $archive_author_normalized_basename"
+            echo "debug: archive author normalized: $source_archive_normalized_basename"
         fi
 
-        source_archive_normalized="${t}/${archive_author_normalized_basename}"
+        source_archive_normalized="${t}/${source_archive_normalized_basename}"
         cp "$source_archive" "$source_archive_normalized"
     fi
 
     source_dir="${t}/${source_archive_normalized_basename%.*}"
 
     unzip \
-        -d "$source_dir" \
-        "$source_archive_normalized" >/dev/null
+        "$source_archive_normalized" \
+        -d "$source_dir" >/dev/null
 
     if [[ "$DEBUG" -eq '1' ]]; then
         echo "debug: extracted source dir: $source_dir"
@@ -138,14 +138,14 @@ freshen() {
             -delete
     done
 
-    target_archive="$(dirname -- "$(realpath "$source_archive")")/${archive_author_normalized_basename%.*}${SQUEEZE_SUFFIX}"
+    target_archive="$(dirname -- "$(realpath "$source_archive")")/${source_archive_normalized_basename%.*}${SQUEEZE_SUFFIX}"
     pushd "$source_dir" >/dev/null
     find \
         . \
         -type f |
         sort |
         zip \
-            -x ${EXCLUDE_GLOBS[*]} \
+            -x "${EXCLUDE_GLOBS[@]}" \
             -@ \
             "$target_archive" >/dev/null
 
