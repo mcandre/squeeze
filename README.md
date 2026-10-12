@@ -65,7 +65,7 @@ squeeze normalizes ecomics:
 
 * Convert images to modern [WEBP](https://developers.google.com/speed/webp) format
 * Remove caches for common file managers (Explorer, Finder)
-* Zero pad panel filenames for more consistent page order
+* Zero pad panel and lexicographically sort filenames for more consistent page order
 
 # WARNINGS
 
