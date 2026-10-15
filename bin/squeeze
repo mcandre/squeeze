@@ -27,10 +27,20 @@ DEBUG='0'
 AUTHOR_NORMALIZATION='0'
 
 SOURCE_EXTENSIONS=(
+    'apng'
+    'avif'
     'bmp'
-    'jpg'
     'gif'
+    'heic'
+    'heif'
+    'jng'
+    'jpeg'
+    'jpg'
+    'jxl'
     'png'
+    'pnj'
+    'tif'
+    'tiff'
 )
 TARGET_EXTENSION='webp'
 ALL_EXTENSIONS=("${SOURCE_EXTENSIONS[@]}")
