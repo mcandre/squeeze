@@ -63,7 +63,7 @@ For details on building from source, see [DEVELOPMENT](DEVELOPMENT.md).
 
 squeeze normalizes ecomics:
 
-* Convert images to modern [WEBP](https://developers.google.com/speed/webp) format
+* Convert images to modern [WEBP](https://developers.google.com/speed/webp) format. This often reduces the size of the overall archive.
 * Remove caches for common file managers (Explorer, Finder)
 * Zero pad panel and lexicographically sort filenames for more consistent page order
 
