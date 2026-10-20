@@ -44,7 +44,9 @@ git clone https://github.com/mcandre/squeeze.git ~/src/github.com/mcandre/squeez
 * [bc](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/bc.html)
 * [findutils](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/find.html)
 * [git](https://git-scm.com/)
+* [html2text-cli](https://crates.io/crates/html2text-cli)
 * [ImageMagick](https://imagemagick.org/#gsc.tab=0)
+* [sed](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/sed.html)
 * [zip](https://infozip.sourceforge.net/)
 
 ## Recommended

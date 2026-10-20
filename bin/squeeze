@@ -114,6 +114,8 @@ freshen() {
         cp "$source_archive" "$source_archive_normalized"
     fi
 
+    source_archive_normalized_basename="$(echo "$source_archive_normalized_basename" | html2text)"
+    source_archive_normalized_basename="$(echo "$source_archive_normalized_basename" | sed "s/[[:blank:]]*:[[:blank:]]*/ - /g")"
     source_dir="${t}/${source_archive_normalized_basename%.*}"
 
     unzip \

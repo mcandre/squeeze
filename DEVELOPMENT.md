@@ -8,9 +8,11 @@ We follow standard, `make` based commands for performing build operations.
 * [bash](https://www.gnu.org/software/bash/) 4+
 * [bc](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/bc.html)
 * [findutils](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/find.html)
+* [html2text-cli](https://crates.io/crates/html2text-cli)
 * [Go](https://go.dev/)
 * [ImageMagick](https://imagemagick.org/#gsc.tab=0)
 * [make](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html)
+* [sed](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/sed.html)
 * [ShellCheck](https://www.shellcheck.net/) 0.11.0+
 * [tree](https://en.wikipedia.org/wiki/Tree_(command))
 * [zip](https://infozip.sourceforge.net/)
