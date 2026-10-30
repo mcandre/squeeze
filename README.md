@@ -49,6 +49,10 @@ git clone https://github.com/mcandre/squeeze.git ~/src/github.com/mcandre/squeez
 * [sed](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/sed.html)
 * [zip](https://infozip.sourceforge.net/)
 
+## macOS
+
+* [Homebrew](https://brew.sh/) unzip, which includes fixes for UTF-8 paths
+
 ## Recommended
 
 * [tree](https://en.wikipedia.org/wiki/Tree_(command))

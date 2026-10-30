@@ -18,6 +18,10 @@ We follow standard, `make` based commands for performing build operations.
 * [zip](https://infozip.sourceforge.net/)
 * Provision additional dev tools with `make -f install.mk`
 
+## macOS
+
+* [Homebrew](https://brew.sh/) unzip, which includes fixes for UTF-8 paths
+
 ## Recommended
 
 * [asdf](https://asdf-vm.com/)
