@@ -45,7 +45,7 @@ git clone https://github.com/mcandre/squeeze.git ~/src/github.com/mcandre/squeez
 * [buup](https://github.com/benletchford/buup)
 * [findutils](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/find.html)
 * [git](https://git-scm.com/)
-* [ImageMagick](https://imagemagick.org/#gsc.tab=0)
+* [ImageMagick](https://imagemagick.org/#gsc.tab=0) 7+
 * [sed](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/sed.html)
 * [zip](https://infozip.sourceforge.net/)
 

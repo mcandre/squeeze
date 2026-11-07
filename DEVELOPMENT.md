@@ -9,7 +9,7 @@ We follow standard, `make` based commands for performing build operations.
 * [bc](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/bc.html)
 * [findutils](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/find.html)
 * [Go](https://go.dev/)
-* [ImageMagick](https://imagemagick.org/#gsc.tab=0)
+* [ImageMagick](https://imagemagick.org/#gsc.tab=0) 7+
 * [make](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html)
 * [Rust](https://rust-lang.org/)
 * [sed](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/sed.html)
