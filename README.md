@@ -1,6 +1,8 @@
 # squeeze: comic book optimizer
 
-[![Lint](https://github.com/mcandre/squeeze/actions/workflows/lint.yml/badge.svg)](https://github.com/mcandre/squeeze/actions/workflows/lint.yml) [![license](https://img.shields.io/badge/license-BSD-0)](LICENSE.md)
+[![CI/CD](https://badgen.net/github/checks/mcandre/squeeze?icon=github)](https://github.com/mcandre/squeeze/actions)
+
+[![License](https://badgen.net/static/license/BSD/ab2b29)](LICENSE.md)
 
 ```text
  ___ ___ _ _ ___ ___ ___ ___
