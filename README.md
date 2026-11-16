@@ -1,8 +1,6 @@
 # squeeze: comic book optimizer
 
-[![CI/CD](https://badgen.net/github/checks/mcandre/squeeze?icon=github)](https://github.com/mcandre/squeeze/actions)
-
-[![License](https://badgen.net/static/license/BSD/ab2b29)](LICENSE.md)
+[![CI/CD](https://badgen.net/github/checks/mcandre/squeeze?icon=github)](https://github.com/mcandre/squeeze/actions) [![License](https://badgen.net/static/license/BSD/ab2b29?icon=freebsd)](LICENSE.md)
 
 ```text
  ___ ___ _ _ ___ ___ ___ ___
